@@ -23,7 +23,7 @@ https://github.com/NewPrototype/electron-tallyBook-server
 
 ### 运行流程
 
-- 启动 node 端数据库服务 `cd usr/local/Cellar/mongodb/3.6.5/bin/` `./mongod`
+- 启动 node 端数据库服务 `cd usr/local/Cellar/mongodb/3.6.5/bin/` `./mongodb`
 - 启动 node `node index.js`
 - 启动 web 端 webpack `npm run start`
 - 启动 web 端桌面 `npm run dev`
