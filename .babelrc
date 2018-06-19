@@ -13,16 +13,14 @@
     ],
     "stage-2",
     "latest",
-    "react", ["es2015"]
+    "react"
   ],
   "plugins": [
     "syntax-dynamic-import",
-    "transform-class-properties", [
-      "import",
-      {
-        "style": "css",
-        "libraryName": "antd-mobile"
-      }
-    ]
+    "transform-class-properties", ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    }]
   ]
 }
