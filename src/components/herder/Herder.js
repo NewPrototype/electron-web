@@ -1,13 +1,26 @@
 import React from 'react';
-import { Avatar, Modal, Input } from 'antd';
+import { Avatar, Modal, Input, Popover, Button } from 'antd';
 
 import { login, getLogin } from 'api';
-import ax from 'axios'
-
-
+import ax from 'axios';
 
 import './Herder.styl';
-
+const Content = props => {
+  if (props.ifLogin) {
+    return (
+      <div>
+        <p onClick={props.login}>切换</p>
+        <p onClick={props.logout}>退出</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p onClick={props.login}>登陆</p>
+      </div>
+    );
+  }
+};
 class Herder extends React.Component {
   constructor(props) {
     super(props);
@@ -17,13 +30,22 @@ class Herder extends React.Component {
         userName: '',
         password: '',
       },
-      loginUser: localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')) : {},
+      loginUser: localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user'))
+        : {},
     };
   }
   handleOk = () => {
     //提交
     const { user } = this.state;
     login(user).then(data => {
+      if(!data.user){
+        // this.setState({
+        //   visible: false,
+        // })
+        return 
+      }
+
       localStorage.setItem('user', JSON.stringify(data.user));
       this.setState({
         visible: false,
@@ -32,32 +54,49 @@ class Herder extends React.Component {
       });
       if (data.token) {
         localStorage.setItem('toKen', data.token);
-
-
       }
-
     });
   };
   render() {
     return (
       <div className="herder">
-        <div className="herder-left" onClick={() => {
-          getLogin().then(data => {
-            console.log(data)
-          }).catch(err => {
-            console.log(err)
-          })
-        }}>
+        <div
+          className="herder-left"
+          onClick={() => {
+            getLogin()
+              .then(data => {
+                console.log(data);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          }}
+        >
           <img src={require('./../../images/book.png')} alt="" /> 记账本
         </div>
         <div>
-          <Avatar style={{ backgroundColor: "#f56a00", verticalAlign: 'middle' }} size="large" onClick={() => {
-            this.setState({
-              visible: true,
-            })
-          }}>
-            {this.state.loginUser.userName || '未登陆'}
-          </Avatar>
+          <Popover
+            content={<Content ifLogin={this.state.loginUser.userName} login={() => {
+              this.setState({
+                visible: true,
+              });
+            }} logout={()=>{
+                this.setState({
+                  loginUser:{}
+                })
+                localStorage.removeItem('user');
+                localStorage.removeItem('toKen');
+            }}/>}
+            placement="bottomRight"
+            titletrigger="hover"
+          >
+            <Avatar
+              style={{ backgroundColor: '#f56a00', verticalAlign: 'middle' }}
+              size="large"
+            >
+              {this.state.loginUser.userName || '未登陆'}
+            </Avatar>
+          </Popover>
         </div>
         <Modal
           title="登陆中心"

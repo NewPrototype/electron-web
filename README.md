@@ -19,8 +19,6 @@ https://github.com/NewPrototype/electron-tallyBook-web
 https://github.com/NewPrototype/electron-tallyBook-server
 
 
-如果没有 mongodb 先去去官网下载 官方链接https://www.mongodb.com/
-
 ### 运行流程
 
 - 启动 node 端数据库服务 `cd usr/local/Cellar/mongodb/3.6.5/bin/` `./mongodb`
