@@ -5,6 +5,8 @@
 - react
 - es6
 - electron
+- koa2
+- mongoose
 
 一个 window,mac 的桌面应用，这个是 web 端
 
@@ -16,7 +18,8 @@ https://github.com/NewPrototype/electron-tallyBook-web
 
 https://github.com/NewPrototype/electron-tallyBook-server
 
-如果没有 mongpdb 去官网下载 https://www.mongodb.com/
+
+如果没有 mongodb 先去去官网下载 官方链接https://www.mongodb.com/
 
 ### 运行流程
 
