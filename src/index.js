@@ -16,7 +16,6 @@ import Footer from 'components/footer';
 
 class App extends React.Component {
   componentWillMount() { }
-
   render() {
     return (
       <div className='main'>
